@@ -1,0 +1,18 @@
+<button *ngIf="!isVisible" (click)="edit()"> Edit </button>
+
+<div *ngIf="isVisible" class="edit">
+    <p>Update Competition</p>
+    <div>
+        <h4>Title</h4>
+        <p> setting: {{competition.title}} </p>
+        <app-update-field url="/api/competition/" [_id]="competition._id" httpVerb="patch" field="title"
+            [isString]="true">
+        </app-update-field>
+    </div>
+    <div>
+        <button (click)="close()"> Close Edit </button>
+        <app-button-with-comm-light [isUncertain]="true" class="edit" buttonLabel="Delete"
+            [commData]="{url: '/api/competition/' + competition._id, httpVerb: 'delete'}">
+        </app-button-with-comm-light>
+    </div>
+</div>

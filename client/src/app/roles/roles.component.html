@@ -1,0 +1,6 @@
+<p class='title'>You are:
+        <span *ngFor="let processedRole of processedRoles"
+                [ngClass]="{'value': !processedRole.hasRole, 'has_role': processedRole.hasRole}">
+                {{processedRole.role}}
+        </span>
+</p>

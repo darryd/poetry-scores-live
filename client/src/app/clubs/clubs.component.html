@@ -1,0 +1,22 @@
+<h2> Poetry Scores </h2>
+<p> Ruining the suspense since 2015. </p>
+<h2> Clubs </h2>
+<app-create-club *ngIf="false && isAuthenticated"> 
+    Create a club.
+</app-create-club>
+
+<div class='clubs`'>
+    <div class='club-row' *ngFor="let club of clubsSyncArray?.keepUpToDate?.rows">
+        <div>
+             <a [routerLink]="['/', club.name]">{{club.title}}</a>
+            <span *ngIf="permissionsService.isMyRole('owner', club._id)"> Owner </span>
+            <span *ngIf="permissionsService.isMyRole('admin', club._id)"> Admin </span>
+        </div>
+
+        <div *ngIf='false'>
+            <p *ngIf="club.isOwner"> Owner </p>
+            <p *ngIf="club.isAdmin"> Admin </p>
+        </div>
+
+    </div>
+</div>

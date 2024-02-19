@@ -1,0 +1,41 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-xs-12 poet">
+      {{performance?.object?.poet}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-7">
+      <app-scores [performance]="performance" 
+                  [scores]="scores" 
+                  [score]="performance?.children?.Score" 
+                  [rank]="rank" 
+                  [incomingRank]="incomingRank"
+                  [round]="round"
+                  [removeMinAndMaxScores]="removeMinAndMaxScores">
+      </app-scores>
+    </div>
+
+    <div class="col-xs-2">
+      <app-time [minutes]=performance?.object?.minutes [seconds]=performance?.object?.seconds [scores]=scores>
+      </app-time>
+    </div>
+
+    <div class="col-xs-3">
+      <app-penalty [penalty]=performance?.object?.penalty [scores]=scores></app-penalty>
+    </div>
+  </div>
+    <div *ngIf="isAuthorized">
+      <button *ngIf="!isEditMode" (click)="setEditMode(true)">Edit</button>
+      <div class="edit-performance" *ngIf="isEditMode">
+        <app-update-performance 
+              [performance]="performance"
+              [rows]="rows"
+              [index]="i"
+              [first]="first"
+              [last]="last">
+        </app-update-performance>
+      </div>
+    </div>
+</div>

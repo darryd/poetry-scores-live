@@ -1,0 +1,87 @@
+requtest{
+    "child": "Score", "child_id": "631aeb8c4e9d0b433a575b99", "omit":["omit_me"]
+}
+
+
+result: {
+    "parents": [
+        {
+            "name": "Performance",
+            "_id": "631aeb8c4e9d0b433a575b96",
+            "isAlive": true
+        },
+        {
+            "name": "Round",
+            "_id": "6316fb4f45a379cea7fbb8fa",
+            "isAlive": true
+        },
+        {
+            "name": "Competition",
+            "_id": "62ae9a94af0ea6790c2e5752",
+            "isAlive": true
+        },
+        {
+            "name": "Club",
+            "_id": "62ae9983af0ea6790c2ddbf7",
+            "isAlive": true
+        }
+    ]
+}
+
+At the time of the request, we see that the Score has three children, all of whom are still alive.
+
+First make this request. 
+
+Recieve a list of parents
+
+If any one of the parents are dead, then Score is also dead.
+
+So starting with Competition, 
+
+Competition needs to look up its parents, but it also looks up its children in SyncFollow.
+So Competition's.
+
+
+Competition will pass down it's parent list down to Round. Round can assume that it has no
+other parents than Competition. This assumption may not always be true, but it is true for 
+Round. If we come across a case where it's not true, then we need to rethink the strategy.
+
+Round then passes can tell Performances who its parents are. And Performances can tell the
+Scores who their parents are.
+
+Previously there was a 'delete' event that got sent from the server to all the children. Now
+the server doesn't send out the 'delete' event tp the children. So a new 'WatchParentsSevice'
+will take the place of the server for sending 'delete' events to the children. So, these 'delete' event
+events should arrive at the same place that they were previously arriving at.
+
+
+/*
+
+Perhaps we have an ObituaryService. That notifies you when your parent has died.
+You pass it your Model Name, _id, and listener (this.listner).
+When one of your parents die, you get passed a 'delete' event to this.listner.
+
+We could for testing purposes, as a first step, simply have a button called 'fake death'
+to see if we can pass a 'delete' event to every child ha ha (evil laugh)
+
+So how would this work?
+
+Well, for starters, the ObituaryService has to listen to the obituary channel to get messages
+like this: 
+
+Channel: obituary
+{"timestamp":1670285709829,"data":{"modelName":"Performance","_id":"6333db037998682c136c2d15"}}
+
+
+Suppose you are a Score, you want to use the ObituaryService so you pass it,
+your {'Score', _id, listener} 
+
+The obituaryService (or maybe obituaryClass) looks up your parents.)
+
+So the obituaryService keeps your info plus has a list of your parents.
+
+When it "hears" on the obituary channel that one of your parents died, it sends your listner a 'delete' event.
+
+Cleanup, there should be some cleanup code for when you know longer need to listen to 
+
+*/

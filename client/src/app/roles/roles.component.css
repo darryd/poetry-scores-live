@@ -1,0 +1,10 @@
+:host {
+    color: grey;
+}
+
+.title {
+    color: black;
+}
+.has_role {
+    color: blue;
+}

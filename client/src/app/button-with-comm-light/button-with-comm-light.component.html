@@ -1,0 +1,14 @@
+
+<button *ngIf="!timeLeft" (click)="onClick()">
+        <app-communication-lights *ngIf="hasLights" [sendData$]="sendData$"></app-communication-lights>
+        {{buttonLabel}}
+</button>
+
+<div *ngIf="timeLeft">
+        <span style="background-color: yellow">
+                Are you sure?
+                {{getTimeString(timeLeft)}}
+        </span>
+        <button (click)="no()"> No </button>
+        <button (click)="yes()"> Yes </button>
+</div>

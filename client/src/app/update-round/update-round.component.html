@@ -1,0 +1,88 @@
+<div class='host'>
+
+    <div class="edit"> Update Round </div>
+    
+    <div id='edit'>
+        
+        <div class='edit'>
+            <h4 class='edit'  >Title</h4>
+            <p> setting: {{round.object.title}} </p>
+            <app-update-field url="/api/round/" [_id]="round._id" httpVerb="patch" field="title" [isString]="true">
+            </app-update-field>
+        </div>
+
+        <div class='edit'>
+            <h4>Remove Min and Max</h4>
+            <!-- Default switch -->
+            <p> setting: {{round.object.removeMinAndMaxScores ? 'on' : 'off'}} </p>
+            <div class="custom-control custom-switch">
+                <app-communication-lights [sendData$]="$sendDataMinMax"></app-communication-lights>
+                <input [(ngModel)]="removeMinAndMaxScores" (input)="updateRemoveMinAndMaxScores()" type="checkbox"
+                    class="custom-control-input" id="customSwitches">
+                <label class="custom-control-label" for="customSwitches">Remove Min/Max</label>
+            </div>
+        </div>
+
+        <div class='edit'>
+            <h4>Time Limit</h4>
+            <p> setting: {{getTimeString(round.object.timeLimit)}} </p>
+            <app-update-time-limit [round_id]="round._id"></app-update-time-limit>
+        </div>
+
+        <div class='edit'>
+            <h4>Grace</h4>
+            <p> setting: {{round.object.grace}} </p>
+            <app-update-field url="/api/round/" [_id]="round._id" httpVerb="patch" field="grace" [isString]="false">
+            </app-update-field>
+        </div>
+
+        <div class='edit'>
+            <h4>Number of Judges</h4>
+            <p> setting: {{round.object.numJudges}} </p>
+            <app-update-field url="/api/round/numJudges" [_id]="round._id" httpVerb="patch" field="numJudges"
+                [isString]="false">
+            </app-update-field>
+        </div>
+
+        <div class='edit'>
+            <h4> Previous Round:</h4>
+            <p> setting: {{prs.getRound(round.object.previousRound)?.title || 'None'}} </p>
+
+            <app-communication-lights [sendData$]="$sendDataPreviousRound"></app-communication-lights>
+            <select [(ngModel)]="previousRound_id" (change)="updatePreviousRound()">
+                <option [value]="p._id" *ngFor="let p of prs.previousRounds[round._id]">{{p['title']}}</option>
+            </select>
+        </div>
+
+        <div class='edit'>
+            <h4> Cumulative </h4>
+            <p> setting: {{ round.object.isCumulative ? 'on' : 'off' }} </p>
+            <div class="custom-control custom-switch">
+                <app-communication-lights [sendData$]="$sendDataCumulative"></app-communication-lights>
+                <input [(ngModel)]="isCumulative" (input)="updateIsCumulative()" type="checkbox"
+                    class="custom-control-input" id="customSwitches3">
+                <label class="custom-control-label" for="customSwitches3">Is Cumulative</label>
+            </div>
+            <p *ngIf="!prs.getRound(round.object.previousRound) && round.object.isCumulative">
+                Note: You haven't set a previous round.
+            </p>
+        </div>
+
+        <div class='edit'>
+            <h4> Incoming rank:</h4>
+            <p *ngIf="round.object.incomingRank"> setting: {{round.object.incomingRank}} </p>
+            <p *ngIf="!round.object.incomingRank"> setting: All Poets </p>
+
+            <app-update-incoming-rank [round]="round"></app-update-incoming-rank>
+        </div>
+
+    </div>
+    <div class='edit'>
+        <button (click)="close()"> Close Edit </button>
+        <app-up-down [rows]="rows" [row]="round" url="/api/round/switch" [index]="index" [first]="first" [last]="last">
+        </app-up-down>
+        <app-button-with-comm-light [isUncertain]="true" class="edit" buttonLabel="Delete Round"
+            [commData]="{url: '/api/round/' + round._id, httpVerb: 'delete'}">
+        </app-button-with-comm-light>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+.clubs {
+    margin: 20px;
+    display: inline-grid;
+    grid-template-rows: 1f;
+    /*max-width: 50px;*/
+    grid-row-gap: 20px;
+    color: white;
+}
+
+.club-row {
+    /*max-width: 500px;*/
+    background-color: lightgray;
+    grid-gap: 10px;
+}
+
+.club-row:nth-child(odd) {
+    background-color: #def28e
+;
+}
+
+.about {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    justify-items: center;
+}
+
+.about > p {
+    background-color: yellowgreen;
+
+}

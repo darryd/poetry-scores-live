@@ -1,0 +1,5 @@
+#update-scores {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min-content, 60px))
+
+}

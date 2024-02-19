@@ -1,0 +1,12 @@
+<p class='actual'> {{ getTimeString(object)}} </p>
+<div class='edit'>
+    <div>
+        <input [(ngModel)]="newMinutes" (input)="updateMinutes()" type="number">
+        <app-communication-lights [sendData$]="minutes$"> </app-communication-lights>
+    </div>
+    <div class="time-colon">:</div>
+    <div>
+        <input [(ngModel)]="newSeconds" (input)="updateSeconds()" min="0" max="59" type="number">
+        <app-communication-lights [sendData$]="seconds$"></app-communication-lights>
+    </div>
+</div>

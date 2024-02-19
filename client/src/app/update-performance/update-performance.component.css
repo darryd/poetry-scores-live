@@ -1,0 +1,10 @@
+#edit {
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20em, 1fr))
+}
+
+#scores {
+    display: grid;
+    grid-template-columns: repeat(5, min-content);
+}

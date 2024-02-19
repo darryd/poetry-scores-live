@@ -1,0 +1,12 @@
+<form (submit)="update()">
+    <app-communication-lights [sendData$]="sendData$" [sentFunc]="dataSentFunc()">
+    </app-communication-lights>
+    <input [(ngModel)]="newValue" [style.width]="width" [type]="type" [ngModelOptions]="{standalone: true}">
+    
+    
+    <app-button-with-comm-light
+        buttonLabel="Submit"
+        [isUncertain]="isUncertain" 
+        [onClickCallback]="getOnClickCallback()">
+    </app-button-with-comm-light>
+</form>

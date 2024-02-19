@@ -1,0 +1,11 @@
+<form (submit)="update()">
+    <app-communication-lights [sendData$]="sendData$">
+    </app-communication-lights>
+
+    <input [(ngModel)]="isAllPoets" (input)="updateIsAllPoets()" type="checkbox" class="custom-control-input" [ngModelOptions]="{standalone: true}"
+        id="customSwitches4">
+    <label class="custom-control-label" for="customSwitches4">All Poets</label>
+
+    <input *ngIf="!isAllPoets" id="IncomingRank" [(ngModel)]="newIncomingRank" [style.width]="width" [type]="type" [ngModelOptions]="{standalone: true}">
+    <button *ngIf="!isAllPoets" type=submit (click)="update()">Submit</button>
+</form>

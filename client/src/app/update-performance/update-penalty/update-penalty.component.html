@@ -1,0 +1,4 @@
+<p class='actual'> {{ object.penalty || '.' }} </p>
+<input [(ngModel)]="newPenalty" (input)="updatePenalty()" type="number">
+<br>
+<app-communication-lights [sendData$]="sendData$"></app-communication-lights>

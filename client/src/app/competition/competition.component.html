@@ -1,0 +1,59 @@
+<div *ngIf="competition">
+    <a [routerLink]="['/', club?.name]">{{club?.title}}</a>
+    
+
+    <p *ngIf="club?.name === 'demo'">
+        Note: we can not take responsibility for the content here since it is editable by the public.
+    </p>
+
+    <p *ngIf="isLocked() && (isOwner() || isAdmin() || isScorekeeper())" >🔒</p>
+
+    <div *ngIf="isOwner()">
+        <button *ngIf="!isLocked()" (click)="lock()">Lock</button>
+        <button *ngIf="isLocked()" (click)="unlock()">Unlock</button>
+    </div>
+
+    <app-roles *ngIf="isAuthorized()" [possibleRoles]="['Owner', 'Admin', 'Scorekeeper']" [roles]="roles"></app-roles>
+    <h1>{{competition?.object?.title}}</h1>
+
+    <app-poets [poets]="followCompetition?.followRow?.children?.Signup?.followRows"></app-poets>
+
+    <app-edit-rows *ngIf="(isOwner() || isAdmin()) && !isLocked()" 
+        title="Scorekeepers"
+        [rows]="followCompetition?.followRow?.children?.Scorekeeper?.followRows" 
+        fieldName="object.user.email"
+        isString="true"
+        [fnGetDeleteCommData]="getDeleteCommDataForScorekeepers"
+        [fnGetCreateCommData]="getCreateCommDataFunctionScorekeeper()"
+        >
+    </app-edit-rows>
+
+    <app-edit-rows *ngIf="isAuthorized()" 
+        title="Poets"
+        [rows]="followCompetition?.followRow?.children?.Signup?.followRows" 
+        fieldName="object.poet"
+        isString="true"
+        [fnGetDeleteCommData]="getDeleteCommDataForPoets"
+        [fnGetCreateCommData]="getCreateCommDataFunction()"
+        >
+    </app-edit-rows>
+
+
+    <div *ngFor="let round of followCompetition?.followRow?.children?.Round?.followRows; let i = index; let first = first; let last = last">
+        <app-round 
+            [round]="round" 
+            [isAuthorized]="isAuthorized()"
+            [rows]="followCompetition.followRow.children.Round.followRows"
+            [index]="i"
+            [first]="first"
+            [last]="last"
+        >
+        </app-round>
+    </div>
+
+    <app-button-with-comm-light *ngIf="isAuthorized()"
+        buttonLabel="Add Round"
+        [commDataFunc]="getDefaultRound()"
+    >
+    </app-button-with-comm-light>
+</div>

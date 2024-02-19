@@ -1,0 +1,34 @@
+
+<div class="container">
+  <div class="row"> 
+    <div *ngFor="let score of scores.scores; trackBy: trackByFn" class="col-xs-1">
+        <app-judge [score]="score"></app-judge>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="scores.timePenalty">
+    <div class="col-xs-12 value">
+      <span class="heading"> Time Penalty: </span> {{scores.timePenalty / scores.multiplyer}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 value">
+      <span class="heading"> Score: </span> {{(scores.sum / scores.multiplyer)}}
+    </div>
+  </div>
+  <div class="row" *ngIf="round?.object?.isCumulative">
+    <div class="col-xs-12 value">
+      <span class="heading"> Total: </span> {{(total / scores.multiplyer)}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 value">
+      <span class="heading"> Rank: </span> {{ranking}}
+    </div>
+  </div>
+  <div *ngIf="isTied" class="row">
+    <div class="col-xs-12 value">
+      <span class="heading"> Tied with: </span> {{tiedWithStr}}
+    </div>
+  </div>
+</div>

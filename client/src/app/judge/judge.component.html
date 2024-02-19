@@ -1,0 +1,10 @@
+<div class="heading">
+  {{score.name}}
+</div>
+<div  [ngClass]="{'value': !(score.isHigh || score.isLow), 'high_or_low_value': (score.isHigh || score.isLow)}"
+     >
+  {{scoreFormated}}
+</div>
+
+<p class="high_or_low" *ngIf="score.isHigh"> High </p>
+<p class="high_or_low" *ngIf="score.isLow"> Low </p>

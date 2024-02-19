@@ -1,0 +1,38 @@
+/* You can add global styles to this file, and also import other style files */
+/*
+body {
+    color: white;
+    background-color:#050606
+}
+
+a {
+    color: #BFB8C5
+}
+*/
+html {
+    background-color: rgb(255, 255, 255);
+}
+
+.heading {
+    color: #cffafa;
+}
+
+.value {
+    color: #c2c2b6;
+}
+
+.high_or_low_value {
+    color: rgb(253, 215, 215);
+}
+
+.high_or_low {
+    color: rgb(245, 133, 133);
+}
+
+.actual {
+    color:  darkblue;
+}
+
+.edit {
+    background-color: lightsalmon
+}

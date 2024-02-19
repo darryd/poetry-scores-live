@@ -1,0 +1,10 @@
+<div *ngIf="!(!minutes && !seconds)">
+  <div class="heading">
+    Time
+  </div>
+  <div *ngIf="!(!minutes && !seconds)">
+    <div class="value">
+      {{timeFormat.timeString}}
+    </div>
+  </div>
+</div>

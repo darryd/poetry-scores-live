@@ -1,0 +1,4 @@
+    <h4 *ngIf="poets?.length > 0"> Poets: </h4>
+    <span class="poet" *ngFor="let poet of poets">
+        {{poet.object.poet}}
+    </span>

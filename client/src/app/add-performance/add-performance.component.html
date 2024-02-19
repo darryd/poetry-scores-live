@@ -1,0 +1,8 @@
+<div id="poets" class="edit" *ngFor="let poet of poets">
+    <app-button-with-comm-light *ngIf="!hasPoetEnteredRound(poet)" buttonLabel="poet"
+        [buttonLabel]="poet" [commData]="getCommData(poet)">
+    </app-button-with-comm-light>
+    <div *ngIf="hasPoetEnteredRound(poet)">
+        {{poet}}
+    </div>
+</div>

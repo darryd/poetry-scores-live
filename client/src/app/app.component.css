@@ -1,0 +1,11 @@
+#connection-status-div {
+    padding-left: 3px;
+    display: grid;
+    grid-template-columns: 20px auto;
+    background-color: white;
+    grid-gap: 3px;
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
+    z-index: 1000
+}

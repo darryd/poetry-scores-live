@@ -1,0 +1,43 @@
+<div class="edit">
+
+  <p>Update Performance</p>
+  <div id="edit">
+
+    <div id="poet">
+      <h4>Poet</h4>
+      <h4 class='actual'>{{performance?.object?.poet}}</h4>
+      <app-update-field url="/api/Performance/" [_id]="performance._id" httpVerb="patch" field="poet" [isString]="true"></app-update-field>
+    </div>
+
+    <div id="judges">
+      <h4>Judges</h4>
+      <div id="scores">
+        <app-update-score *ngFor="let row of performance?.children?.Score?.followRows; let i = index"
+          [score]="row?.object?.score" [score_id]="row?.object?._id" [index]=i [canAdvance]="canAdvance"
+          [canAdvance$]="canAdvance$">
+        </app-update-score>
+      </div>
+      <div>Hint: Do not enter decimal points. 78 becomes 7.8, but 10 is special; 10 remains as 10.</div>
+    </div>
+
+    <div id="time">
+      <h4> Time </h4>
+      <app-update-time [performance_id]="performance?._id" [object]="performance?.object"></app-update-time>
+    </div>
+
+    <div id="penalty">
+      <h4> Penalty </h4>
+      <app-update-penalty [performance_id]="performance?._id" [object]="performance?.object"></app-update-penalty>
+    </div>
+  </div>
+
+  <div class='pannel'>
+        <button (click)="close()"> Close Edit </button>
+        <app-up-down [rows]="rows" [row]="performance" url="/api/performance/switch" [index]="index" [first]="first" [last]="last">
+        </app-up-down>
+        <app-button-with-comm-light [isUncertain]="true" class="pannel" buttonLabel="Delete"
+            [commData]="{url: '/api/performance/' + performance._id, httpVerb: 'delete'}">
+        </app-button-with-comm-light>
+    </div>
+
+</div>

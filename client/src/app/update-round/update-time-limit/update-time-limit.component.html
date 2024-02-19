@@ -1,0 +1,8 @@
+<form (submit)="update()">
+    <app-communication-lights [sendData$]="sendData$">
+    </app-communication-lights>
+    <input [(ngModel)]="newMinutes" [style.width]="width" [type]="type" [ngModelOptions]="{standalone: true}">
+    :
+    <input [(ngModel)]="newSeconds" [style.width]="width" [type]="type" [ngModelOptions]="{standalone: true}">
+    <button type=submit>Submit</button>
+</form>

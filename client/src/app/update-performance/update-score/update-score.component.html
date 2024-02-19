@@ -1,0 +1,8 @@
+<p class = 'actual'>{{ score || '.'}}</p>
+<input  [id]="inputId"
+        [(ngModel)]="newScore" 
+        (input)="updateScore()"
+        step=0.1 type="number"
+        [ngModelOptions]="{standalone: true}"
+       >
+<app-communication-lights [sendData$]="sendData$" > </app-communication-lights>

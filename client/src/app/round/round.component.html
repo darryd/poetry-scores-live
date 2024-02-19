@@ -1,0 +1,36 @@
+
+<h2>{{round.object.title}}</h2>
+<p>
+    Time Limit: {{getTimeLimitFormated()}}
+    Grace: {{round.object.grace}}
+</p>
+
+<div *ngIf='isAuthorized'>
+    <button *ngIf="!isEditMode" (click)="setEditMode(true)">Edit Round</button>
+    <div *ngIf="isEditMode">
+        <app-update-round 
+            [round]="round"
+            [rows]="rows"
+            [index]="index"
+            [first]="first"
+            [last]="last"
+        ></app-update-round>
+    </div>
+</div>
+
+
+<div style="margin: 1px" *ngFor="let performance of performances; trackBy: trackByFn; let i = index; let first = first; let last = last">
+    <app-performance [performance]="performance" 
+                     [rows]="performances" 
+                     [i]="i" 
+                     [first]="first" 
+                     [last]="last" 
+                     [rank]="rank"
+                     [incomingRank]="incomingRank"
+                     [round]="round"
+                     [isAuthorized]="isAuthorized"
+                     [removeMinAndMaxScores]="round.object.removeMinAndMaxScores"></app-performance>
+</div>
+<div *ngIf="isAuthorized">
+    <app-add-performance [round]="round" [poets]="incomingPoets"></app-add-performance>
+</div>

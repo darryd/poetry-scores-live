@@ -1,0 +1,17 @@
+<div id='connection-status-div'>
+    <canvas id="connection-canvas" width=12 height=20></canvas>
+    <p id="connection-status">{{stateChange?.current || '...'}}
+        <span *ngIf="numberOfViewersService.numberOfWatchers"> 
+            - viewers: {{numberOfViewersService.numberOfWatchers}} 
+        </span>
+        <img *ngIf='isLoading' src="/assets/loading.gif" alt="Loading...">
+    </p>
+</div>
+
+<!-- Latest CDN production CSS -->
+<link href="https://global.oktacdn.com/okta-signin-widget/3.1.3/css/okta-sign-in.min.css" type="text/css" rel="stylesheet"/>
+<a routerLink="/"> Home </a>
+<a *ngIf="false && !isAuthenticated" routerLink="/register"> Register </a>
+<a *ngIf="false && !isAuthenticated" routerLink="/login"> Login </a>
+<a *ngIf="isAuthenticated" href="#" (click)="logout()"> Logout </a>
+<router-outlet></router-outlet>

@@ -1,0 +1,34 @@
+<h2> {{club?.title}} </h2>
+<p *ngIf="isOwner()"> Owner </p> <!-- TODO We made a Component for this. Use it instead of this. -->
+<div> 
+    <button *ngIf="isTransferHidden && isOwner()" (click)="isTransferHidden = false"> Transfer Club </button>
+</div>
+<div *ngIf="!isTransferHidden && isOwner()" class="edit">
+    <p> Transfer this club to someone else. </p> <!-- placeholder should be 'email address' -->
+    <app-update-field *ngIf="isOwner()" url="/api/club/owner" [_id]="club?._id" httpVerb="patch" [isString]="true"
+        [isUncertain]="true">
+    </app-update-field>
+    <button (click)="isTransferHidden = true">Hide</button>
+</div>
+
+<app-edit-rows *ngIf="isOwner()" 
+        title="Admin"
+        [rows]="syncAdmin?.keepUpToDate?.rows" 
+        fieldName="user.email"
+        isString="true"
+        [fnGetDeleteCommData]="getDeleteCommData"
+        [fnGetCreateCommData]="getCreateCommDataFunction()"
+        >
+</app-edit-rows>
+
+
+<app-create-competition *ngIf="isOwner() || isAdmin()" [club_id]="club?._id"></app-create-competition>
+
+<div class='competition' *ngFor="let competition of syncCompetitions?.keepUpToDate?.rows; let index=index; trackBy: trackByFn">
+    <app-new-year [index]="index" [competitions]=syncCompetitions?.keepUpToDate?.rows></app-new-year>
+    <a [routerLink]="['/competition', competition._id]">{{competition.title}}</a>
+    <span *ngIf="getWatchers(competition._id) > 0"> - viewers: {{ getWatchers(competition._id) }}</span>
+    <div>
+        <app-update-competition *ngIf="(isOwner() || isAdmin()) && !competition.isLocked" [competition]="competition"></app-update-competition>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+:host {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 20vh)
+}
+
+h1 {
+      font-size: 62px;
+      grid-column-start: 2;
+      grid-column-end: 4;
+      grid-row-start: 2;
+      text-align: center;
+      color: orange;
+}
+h2 {
+      font-size: 32px;
+      grid-row: 4;
+      grid-column: 2/4;
+      text-align: center;
+      color: yellow;
+}
+
+
+#background {
+    height: 100%;
+    width: 100%;
+    grid-row-start: 1;
+    grid-row-end: -1;
+    grid-column-start: 1;
+    grid-column-end: -1;
+}

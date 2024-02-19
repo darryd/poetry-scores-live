@@ -1,0 +1,7 @@
+<h3> Sign Up Poets</h3>
+
+<form (submit)="signup()">
+    <app-communication-lights [sendData$]="sendData$" [stateEvent]="stateEvent"></app-communication-lights>
+    <input matInput [(ngModel)]="poet" placeholder="poet" [ngModelOptions]="{standalone: true}">
+    <button type=submit> Sign up </button>
+</form>

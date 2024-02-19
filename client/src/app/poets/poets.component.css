@@ -1,0 +1,7 @@
+.poet {
+    color: purple;
+}
+
+.poet:nth-child(odd) {
+    color: green;
+}

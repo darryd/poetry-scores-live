@@ -1,0 +1,7 @@
+.competition {
+    background-color: lightgrey;
+}
+
+.competition:nth-child(odd) {
+    background-color: #def28e
+}

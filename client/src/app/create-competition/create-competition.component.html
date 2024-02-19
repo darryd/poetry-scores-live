@@ -1,0 +1,8 @@
+<button *ngIf="!isFormVisible" (click)="showForm()"> New Competition </button>
+
+<form *ngIf="isFormVisible" (submit)="create()">
+    <input matInput [(ngModel)]="title" type="text" placeholder="Title"
+        [ngModelOptions]="{standalone: true}">
+    <button mat-stroked-button color="primary" type=submit> Create </button>
+    <button *ngIf="isFormVisible" (click)="hideForm()"> Cancel </button>
+</form>

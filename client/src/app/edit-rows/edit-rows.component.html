@@ -1,0 +1,23 @@
+<div>
+    <button *ngIf="!isVisible" (click)="isVisible = true"> Edit {{title}} </button>
+</div>
+
+<div *ngIf="isVisible" class="edit">
+    <h3>{{title}}</h3>
+    <app-update-field [isString]="isString" [fnGetCommData]="fnGetCreateCommData">
+    </app-update-field>
+
+    <table>
+        <tr *ngFor="let row of rows">
+            <td> {{ getValue(row) }} </td>
+            <td>
+                <app-button-with-comm-light 
+                                buttonLabel="Delete" 
+                                [commData]="getDeleteCommData(row)"
+                                [isUncertain]="true">
+                </app-button-with-comm-light>
+            </td>
+        </tr>
+    </table>
+    <button (click)="isVisible = false"> Close </button>
+</div>
